@@ -2,11 +2,10 @@
 
 namespace App\Exceptions;
 
-use App\Services\Telegram\HttpClient\TGClient;
 use App\Services\Telegram\HttpClient\TGClientHelper;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
@@ -50,19 +49,20 @@ class TGApiException extends Exception
         /**
          * Отправка сообщения в чат, где произошла ошибка
          */
-        if ($botName = Route::current()->parameter('botName')) {
-            if (isset($this->chatIdUser)) {
-                TGClientHelper::sendText(
-                    config("bot.settings.mini_bots.{$botName}.token"),
-                    $this->chatIdUser,
-                    config(
-                        'bot.settings.error_message_to_the_user',
-                        'Произошла ошибка, приносим свои извинения, уже исправляем!'
-                    )
-                );
+        if (!App::runningInConsole()) {
+            if ($botName = Route::current()->parameter('botName')) {
+                if (isset($this->chatIdUser)) {
+                    TGClientHelper::sendText(
+                        config("bot.settings.mini_bots.{$botName}.token"),
+                        $this->chatIdUser,
+                        config(
+                            'bot.settings.error_message_to_the_user',
+                            'Произошла ошибка, приносим свои извинения, уже исправляем!'
+                        )
+                    );
+                }
             }
         }
-
 
         /**
          * Отправка сообщения в группу с ошибками
@@ -85,10 +85,9 @@ class TGApiException extends Exception
     }
 
     /**
-     * @param Request $request
      * @return Response
      */
-    public function render(Request $request): Response
+    public function render(): Response
     {
         if (Route::currentRouteName() === 'webhook') {
             return response('', 204);

@@ -3,15 +3,27 @@
 namespace App\Services\Telegram\Bot;
 
 use App\Models\User;
-use App\Services\Telegram\HttpClient\TGClientHelper;
+use App\Services\Telegram\DTO\UpdateMessage\Sender;
 
-abstract class StorageHelper
+class StorageHelper
 {
     public function __construct(
-        protected User          $user,
+        public readonly User $user,
         public readonly ?string $bot = null,
     )
     {
+    }
+
+    /**
+     * @param Sender $sender
+     * @return User
+     */
+    public static function createUserFromSender(Sender $sender): User
+    {
+        if (!($user = User::where('id_tg', $sender->id)->first())) {
+            $user = User::createFromSender($sender);
+        }
+        return $user;
     }
 
     /**

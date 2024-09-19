@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use App\Services\Telegram\HttpClient\TGClient;
+use App\Services\Parser\TheGuardianParser;
+use App\Services\Telegram\Bot\SmiBot;
+use App\Services\Translator\GoogleTranslateForFree;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,6 +14,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(SmiBot::class, function ($app) {
+            return new SmiBot(
+                theGuardianParser: $this->app->make(TheGuardianParser::class),
+                googleTranslate: $this->app->make(GoogleTranslateForFree::class),
+                botName: 'SMI',
+            );
+        });
+
 //        $this->app->bind(TGClient::class, function ($app) {
 //            return new TGClient(
 //                token : config('bot.settings.base_token')

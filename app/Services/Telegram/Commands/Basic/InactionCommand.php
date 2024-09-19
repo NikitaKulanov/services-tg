@@ -2,18 +2,18 @@
 
 namespace App\Services\Telegram\Commands\Basic;
 
-use App\Services\Telegram\Bot\Bot;
+use App\Services\Telegram\Bot\MiniBot;
 use App\Services\Telegram\Commands\Command;
-use App\Services\Telegram\DTO\Chat;
+use App\Services\Telegram\DTO\UpdateMessage\Chat;
 
 class InactionCommand extends Command
 {
     /**
-     * @param Bot $bot
+     * @param MiniBot $bot
      * @param Chat $chat
      * @return void
      */
-    public function execute(Bot $bot, Chat $chat): void
+    public function execute(MiniBot $bot, Chat $chat): void
     {
         // Команда для бездействия
         return;

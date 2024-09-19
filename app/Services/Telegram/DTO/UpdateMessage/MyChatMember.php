@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Telegram\DTO;
+namespace App\Services\Telegram\DTO\UpdateMessage;
 
 class MyChatMember
 {

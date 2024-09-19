@@ -3,12 +3,10 @@
 namespace App\Services\Telegram\Commands\MillionaireBot;
 
 use App\Exceptions\TGApiException;
-use App\Services\Telegram\Bot\Bot;
+use App\Services\Telegram\Bot\MiniBot;
 use App\Services\Telegram\Commands\Command;
-use App\Services\Telegram\DTO\Chat;
-use App\Services\Telegram\HttpClient\TGClientHelper;
+use App\Services\Telegram\DTO\UpdateMessage\Chat;
 use App\Services\Telegram\Payloads\EditMessageMediaPayload;
-use App\Services\Telegram\Payloads\EditMessagePayload;
 use App\Services\Telegram\Payloads\InputFiles\InputPhoto;
 use App\Services\Telegram\Payloads\Keyboards\Buttons\InlineButton;
 use App\Services\Telegram\Payloads\Keyboards\InlineKeyboard;
@@ -27,28 +25,28 @@ class GameBarCommand extends Command
     const NEW_QUESTION = '/newQuestion';
     const END_GAME = '/endGame';
 
-    private Bot $bot;
+    private MiniBot $bot;
     private Chat $chat;
 
     /**
-     * @param Bot $bot
+     * @param MiniBot $bot
      * @param Chat $chat
      * @return void
      * @throws TGApiException
      */
-    public function execute(Bot $bot, Chat $chat): void
+    public function execute(MiniBot $bot, Chat $chat): void
     {
         $this->bot = $bot;
         $this->chat = $chat;
         $command = $bot->getCommandToExecute();
-        $bar = $bot->getFromStorage(self::nameToCall());
+        $bar = $bot->storageHelper->getFromStorage(self::nameToCall());
 
         // Привет, новая игра
         // Следующий вопрос
 
         if ($command === self::nameToCall()) { // Начнём игру
             $result = $this->sendNewGame();
-            $bot->saveToStorage([
+            $bot->storageHelper->saveToStorage([
                 self::nameToCall() => [
                     'message_id' => $result['message_id'],
                     'question' => null,
@@ -66,7 +64,7 @@ class GameBarCommand extends Command
                 return;
             }
 
-            $bot->saveToStorage([
+            $bot->storageHelper->saveToStorage([
                 self::nameToCall() => [
                     'message_id' => $result['message_id'],
                     'question' => $question,
@@ -90,13 +88,13 @@ class GameBarCommand extends Command
                 if ($barId = $bar['message_id'] ?? false) {
                     if ($bar['number'] >= 10) {
                         $result = $this->sendEndGame($barId);
-                        $bot->saveToStorage([
+                        $bot->storageHelper->saveToStorage([
                             self::nameToCall() => null
                         ]);
                         return;
                     } else {
                         $result = $this->sendInfoCorrectAnswer($barId);
-                        $bot->saveToStorage([
+                        $bot->storageHelper->saveToStorage([
                             self::nameToCall() => [
                                 'message_id' => $result['message_id'],
                                 'question' => null,
@@ -112,7 +110,7 @@ class GameBarCommand extends Command
 
             } else {
                 // Отправить сообщение, что ответ не правильный, начни новую игру
-                $bot->saveToStorage([
+                $bot->storageHelper->saveToStorage([
                     self::nameToCall() => null
                 ]);
 
@@ -132,7 +130,7 @@ class GameBarCommand extends Command
                 return;
             }
 
-            $bot->saveToStorage([
+            $bot->storageHelper->saveToStorage([
                 self::nameToCall() => [
                     'message_id' => $result['message_id'],
                     'question' => $question,

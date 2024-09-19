@@ -3,8 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Services\Telegram\DTO\Sender;
-use App\Services\Telegram\HttpClient\TGClientHelper;
+use App\Services\Telegram\DTO\UpdateMessage\Sender;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

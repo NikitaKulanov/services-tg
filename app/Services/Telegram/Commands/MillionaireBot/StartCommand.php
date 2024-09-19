@@ -3,12 +3,9 @@
 namespace App\Services\Telegram\Commands\MillionaireBot;
 
 use App\Exceptions\TGApiException;
-use App\Services\Telegram\Bot\Bot;
+use App\Services\Telegram\Bot\MiniBot;
 use App\Services\Telegram\Commands\Command;
-use App\Services\Telegram\DTO\Chat;
-use App\Services\Telegram\HttpClient\TGClientHelper;
-use App\Services\Telegram\Payloads\Keyboards\Buttons\ReplyButton;
-use App\Services\Telegram\Payloads\Keyboards\ReplyKeyboard;
+use App\Services\Telegram\DTO\UpdateMessage\Chat;
 use App\Services\Telegram\Payloads\MessagePayload;
 
 class StartCommand extends Command
@@ -24,12 +21,12 @@ class StartCommand extends Command
 "Удачи в игре и пусть победит сильнейший! 🫡";
 
     /**
-     * @param Bot $bot
+     * @param MiniBot $bot
      * @param Chat $chat
      * @return void
      * @throws TGApiException
      */
-    public function execute(Bot $bot, Chat $chat): void
+    public function execute(MiniBot $bot, Chat $chat): void
     {
         $bot->sendMessage(
             MessagePayload::create($chat->id, $this->text)

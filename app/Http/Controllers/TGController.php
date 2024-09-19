@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\TGApiException;
-use App\Services\Telegram\Bot\Bot;
+use App\Services\Telegram\Bot\MiniBot;
+use App\Services\Telegram\Bot\StorageHelper;
 use App\Services\Telegram\DTO\Builder\DTOUpdateBuilder;
 use App\Services\Telegram\HttpClient\TGClient;
 use Illuminate\Http\Request;
@@ -57,9 +58,15 @@ class TGController extends Controller
      */
     public function shutdownBot(Request $request, string $botName): Response
     {
-        $bot = new Bot(
+        $update = DTOUpdateBuilder::buildUpdateDTO($request->json()->all());
+
+        $bot = new MiniBot(
             botName: $botName,
-            update: DTOUpdateBuilder::buildUpdateDTO($request->json()->all())
+            update: $update,
+            storageHelper: new StorageHelper(
+                StorageHelper::createUserFromSender($update->getSender()),
+                $botName
+            )
         );
 
         $bot->sendMessageText(
@@ -83,6 +90,10 @@ class TGController extends Controller
 
         config(['botName' => $botName]);
 
+        if ($botName === 'SMI') {
+            return new Response('', 200);
+        }
+
         $update = DTOUpdateBuilder::buildUpdateDTO($request->json()->all());
 
         switch ($update->myChatMember?->newChatMember->status) {
@@ -91,9 +102,13 @@ class TGController extends Controller
                 return new Response('', 204);
         }
 
-        $bot = new Bot(
+        $bot = new MiniBot(
             botName: $botName,
-            update: $update
+            update: $update,
+            storageHelper: new StorageHelper(
+                StorageHelper::createUserFromSender($update->getSender()),
+                $botName
+            )
         );
 
         $bot->executeCommand($bot->getUpdate()->getPayload());

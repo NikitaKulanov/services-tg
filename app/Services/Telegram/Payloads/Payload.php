@@ -60,4 +60,13 @@ abstract class Payload
         $this->keyboard = $keyboard->toArray();
         return $this;
     }
+
+    /**
+     * @return Payload
+     */
+    public function deleteKeyboard(): Payload
+    {
+        unset($this->keyboard);
+        return $this;
+    }
 }

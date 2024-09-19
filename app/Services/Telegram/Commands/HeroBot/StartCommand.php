@@ -2,9 +2,9 @@
 
 namespace App\Services\Telegram\Commands\HeroBot;
 
-use App\Services\Telegram\Bot\Bot;
+use App\Services\Telegram\Bot\MiniBot;
 use App\Services\Telegram\Commands\Command;
-use App\Services\Telegram\DTO\Chat;
+use App\Services\Telegram\DTO\UpdateMessage\Chat;
 use App\Services\Telegram\Payloads\InputFiles\InputPhoto;
 use App\Services\Telegram\Payloads\Keyboards\Buttons\InlineButton;
 use App\Services\Telegram\Payloads\Keyboards\InlineKeyboard;
@@ -15,11 +15,11 @@ class StartCommand extends Command
     protected string $description = 'This is the starting command';
 
     /**
-     * @param Bot $bot
+     * @param MiniBot $bot
      * @param Chat $chat
      * @return void
      */
-    public function execute(Bot $bot, Chat $chat): void
+    public function execute(MiniBot $bot, Chat $chat): void
     {
         $bot->sendPhoto(
             PhotoPayload::create($chat->id, InputPhoto::create('HeroBot/mst.png')

@@ -2,9 +2,9 @@
 
 namespace App\Services\Telegram\Commands\HeroBot;
 
-use App\Services\Telegram\Bot\Bot;
+use App\Services\Telegram\Bot\MiniBot;
 use App\Services\Telegram\Commands\Command;
-use App\Services\Telegram\DTO\Chat;
+use App\Services\Telegram\DTO\UpdateMessage\Chat;
 use App\Services\Telegram\Payloads\EditMessageMediaPayload;
 use App\Services\Telegram\Payloads\InputFiles\InputPhoto;
 use App\Services\Telegram\Payloads\Keyboards\Buttons\InlineButton;
@@ -201,11 +201,11 @@ class TestBarCommand extends Command
     ];
 
     /**
-     * @param Bot $bot
+     * @param MiniBot $bot
      * @param Chat $chat
      * @return void
      */
-    public function execute(Bot $bot, Chat $chat): void
+    public function execute(MiniBot $bot, Chat $chat): void
     {
         $command = $bot->getCommandToExecute();
 
@@ -234,7 +234,7 @@ class TestBarCommand extends Command
                     )
             );
         } else {
-            $barData = $bot->getFromStorage(self::nameToCall());
+            $barData = $bot->storageHelper->getFromStorage(self::nameToCall());
             $barLevel = $barData['bar']['bar_level'];
             $score = $barData['bar']['score'];
 
@@ -289,7 +289,7 @@ class TestBarCommand extends Command
             }
         }
 
-        $bot->saveToStorage([
+        $bot->storageHelper->saveToStorage([
             self::nameToCall() => [
                 'message_id' => $result['message_id'] ?? null, 'bar' => ['bar_level' => $barLevel, 'score' => $score]
             ]

@@ -2,14 +2,11 @@
 
 namespace App\Services\Telegram\Commands\MusicBot;
 
-use App\Services\Telegram\Bot\Bot;
+use App\Services\Telegram\Bot\MiniBot;
 use App\Services\Telegram\Commands\Command;
-use App\Services\Telegram\DTO\Chat;
-use App\Services\Telegram\HttpClient\TGClientHelper;
+use App\Services\Telegram\DTO\UpdateMessage\Chat;
 use App\Services\Telegram\Payloads\Keyboards\Buttons\InlineButton;
-use App\Services\Telegram\Payloads\Keyboards\Buttons\ReplyButton;
 use App\Services\Telegram\Payloads\Keyboards\InlineKeyboard;
-use App\Services\Telegram\Payloads\Keyboards\ReplyKeyboard;
 use App\Services\Telegram\Payloads\MessagePayload;
 
 class StartCommand extends Command
@@ -17,11 +14,11 @@ class StartCommand extends Command
     protected string $description = 'This is the starting command';
 
     /**
-     * @param Bot $bot
+     * @param MiniBot $bot
      * @param Chat $chat
      * @return void
      */
-    public function execute(Bot $bot, Chat $chat): void
+    public function execute(MiniBot $bot, Chat $chat): void
     {
         $bot->sendMessage(
             MessagePayload::create($chat->id, "Привет! 🎶 Я твой помощник по музыкальным сокровищам!\n".

@@ -2,13 +2,13 @@
 
 namespace App\Services\Telegram\DTO\Builder;
 
-use App\Services\Telegram\DTO\CallbackQuery;
-use App\Services\Telegram\DTO\Chat;
-use App\Services\Telegram\DTO\Message;
-use App\Services\Telegram\DTO\MyChatMember;
-use App\Services\Telegram\DTO\NewChatMember;
-use App\Services\Telegram\DTO\Sender;
-use App\Services\Telegram\DTO\Update;
+use App\Services\Telegram\DTO\UpdateMessage\CallbackQuery;
+use App\Services\Telegram\DTO\UpdateMessage\Chat;
+use App\Services\Telegram\DTO\UpdateMessage\Message;
+use App\Services\Telegram\DTO\UpdateMessage\MyChatMember;
+use App\Services\Telegram\DTO\UpdateMessage\NewChatMember;
+use App\Services\Telegram\DTO\UpdateMessage\Sender;
+use App\Services\Telegram\DTO\UpdateMessage\Update;
 
 class DTOUpdateBuilder
 {

@@ -39,3 +39,8 @@ Artisan::command('set:webhooks', function () {
         $this->info('Status: ' . $item->status() . '. Payload: ' . $item->content());
     }
 })->purpose('Set webhooks for bot TG');
+
+Artisan::command('update:news', function () {
+    app(\App\Services\Telegram\Bot\SmiBot::class)->updateNews();
+    $this->info('Successful');
+})->purpose('Update news channel');

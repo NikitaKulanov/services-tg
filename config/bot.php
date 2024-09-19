@@ -9,8 +9,6 @@ use App\Services\Telegram\Commands\Basic\SubscribeCommand;
 use App\Services\Telegram\Commands\Basic\UnknownCommand;
 use App\Services\Telegram\Commands\Basic\UserAnswerCommand;
 use App\Services\Telegram\Commands\AdapterBot\StartCommand;
-use App\Services\Telegram\Commands\MillionaireBot\BarCommand;
-use App\Services\Telegram\Commands\MillionaireBot\TestCommand;
 
 return [
     'settings' => [
@@ -36,6 +34,16 @@ return [
         'message_shutdown_bot' => 'Простите, бот пока не доступен, обратитесь попозже',
 
         'mini_bots' => [
+
+            'SMI' => [
+                'token' => '7073387392:AAEC36z_jIPlqnh7zVZ8CyKA40TG9v3VrOo',
+                'id_channel' => (integer) env('ID_CHANNEL'),
+//                'id_chat_error' => (integer) env('CHAT_ID_FOR_CHANNEL_ERROR'),
+                'name_channel' => 'Западные СМИ ⚡',
+                'url_channel' => 'https://t.me/zapad_smi',
+                'url_news' => 'https://www.theguardian.com/',
+                'storage' => 'storage.json'
+            ],
 
             'MusicBot' => [
                 'token' => '7379411798:AAHrphBJ4yBhcAPWgQyL9XBR-f9NxYE7jQk',
