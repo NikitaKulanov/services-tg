@@ -38,7 +38,7 @@ class SubscribeCommand extends Command
                     ->setKeyboard(InlineKeyboard::create()->setKeyboardButton($keyboardButton))
             );
 
-            $bot->addMessageIdForDelete($result['message_id']);
+            $bot->storageHelper->addMessageIdForDelete($result['message_id']);
 
         } else {
             $bot->sendMessage(

@@ -19,7 +19,7 @@ class UserAnswerCommand extends Command
         $bot->sendMessage(
             MessagePayload::create($chat->id, $bot->getUpdate()->getPayload())
         );
-        $bot->setWaitingBotAnswer(false);
+        $bot->storageHelper->setWaitingBotAnswer(false);
     }
 
     /**
