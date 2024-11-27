@@ -12,7 +12,7 @@ use App\Services\Telegram\Commands\AdapterBot\StartCommand;
 
 return [
     'settings' => [
-        'base_token' => "6851291778:AAFMGgGVYqrnNOmcKFUvQCfeKT_ULxprJ-k",
+        'base_token' => "7436812591:AAHUv9bqawq1sN4zTpOBcoO8sqVhVRC3Ik0",
         'url_webhook' => env('URL_WEBHOOK'),
 
         /** Отвечать в группах */
