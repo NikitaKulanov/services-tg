@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Services\Parser;
-
 use App\Services\Telegram\DTO\Parser\Post;
+use App\Services\Telegram\HttpClient\TGClientHelper;
 use DiDom\Document;
 use Illuminate\Support\Facades\Http;
 
@@ -20,8 +19,8 @@ class TheGuardianParser
         date_default_timezone_set('Europe/London');
 
         $urlPages = [
-            Http::get($urlNews . 'world/' . date('Y') . '/' . date('M') . '/' . date('d') . '/all')->body(),
-            Http::get($urlNews . 'us-news/' . date('Y') . '/' . date('M') . '/' . date('d') . '/all')->body() // Новости из США
+            Http::get($urlNews . 'world/'. date('Y') . '/' . date('M') . '/' . date('d') .'/all')->body(),
+            Http::get($urlNews . 'us-news/'. date('Y') . '/' . date('M') . '/' . date('d') .'/all')->body() // Новости из США
         ];
 
         $arrayHrefs = [];
@@ -73,12 +72,7 @@ class TheGuardianParser
                 } elseif ($document->has('.dcr-1w6uej9')) {
                     $title = $document->first('.dcr-1w6uej9')->text();
                 } else {
-                    $arrayPosts[] = new Post(
-                        '',
-                        $href,
-                        '',
-                        ''
-                    );
+                    TGClientHelper::info("TheGuardianParser: html элемент заголовок не найден\nСсылка на статью: $href");
                     continue;
                 }
 

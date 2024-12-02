@@ -5,7 +5,6 @@ namespace App\Services\Telegram\Bot;
 use App\Exceptions\TGApiException;
 use App\Services\Parser\TheGuardianParser;
 use App\Services\Telegram\DTO\Parser\Post;
-use App\Services\Telegram\HttpClient\TGClientHelper;
 use App\Services\Telegram\Payloads\PhotoPayload;
 use App\Services\Translator\GoogleTranslateForFree;
 use Illuminate\Support\Facades\Storage;
@@ -105,14 +104,7 @@ class SmiBot extends Bot
         ) {
             /** @var Post $post */
             try {
-                if ($post->title !== '') {
-                    $this->sendPost($post);
-                } else {
-                    TGClientHelper::info(
-                        "TheGuardianParser: html элемент заголовок не найден\nСсылка на статью: $post->url"
-                    );
-                }
-
+                $this->sendPost($post);
             } catch (TGApiException $exception) {
                 $response = json_decode($exception->responseJson, true);
                 if ($retryAfter = $response['parameters']['retry_after'] ?? null) {
