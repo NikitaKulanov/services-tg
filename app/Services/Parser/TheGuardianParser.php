@@ -72,7 +72,7 @@ class TheGuardianParser
                 } elseif ($document->has('.dcr-1w6uej9')) {
                     $title = $document->first('.dcr-1w6uej9')->text();
                 } else {
-                    TGClientHelper::info("TheGuardianParser: html элемент заголовок не найден\nСсылка на статью: $href");
+//                    TGClientHelper::info("TheGuardianParser: html элемент заголовок не найден\nСсылка на статью: $href");
                     continue;
                 }
 
