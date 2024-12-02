@@ -77,7 +77,10 @@ class TheGuardianParser
                 }
 
                 $paragraphs = $document->first('#maincontent')->find('p');
-                $text = $paragraphs[0]->text() . "\n\n" . $paragraphs[1]->text();
+                if (array_key_exists(0, $paragraphs) and array_key_exists(1, $paragraphs)) {
+                    $text = $paragraphs[0]->text() . "\n\n" . $paragraphs[1]->text();
+                } else continue;
+
 //                for ($i = 0; $i <= 1; $i++) {
 //                    $text .= $paragraphs[$i]->text() . "\n\n";
 //                }
