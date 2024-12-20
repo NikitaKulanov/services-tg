@@ -102,7 +102,7 @@ return [
             ],
 
             'FileCheckBot' => [
-                'token' => '7286332068:AAFrchTWs8WDawpuOWQDGhcFrQhPeddkiQs',
+                'token' => '6455367526:AAHwmAR3eutpESazEamfuPt5c1yvHsvSowo',
                 'simple_commands' => [
                     \App\Services\Telegram\Commands\FileCheckBot\StartCommand::nameToCall() => \App\Services\Telegram\Commands\FileCheckBot\StartCommand::class,
                     \App\Services\Telegram\Commands\FileCheckBot\AccessCommand::nameToCall() => \App\Services\Telegram\Commands\FileCheckBot\AccessCommand::class,
