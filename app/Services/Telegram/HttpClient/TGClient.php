@@ -142,7 +142,7 @@ class TGClient
 
         $this->checkException(
             $response,
-            ['chat_id' => $chatId, 'user_id' => $userId],
+            ['chat_id' => $chatId, 'message_id' => $messageId],
             self::DELETE_MASSAGE
         );
 
