@@ -140,11 +140,11 @@ class TGClient
             ]
         );
 
-//        $this->checkException(
-//            $response,
-//            ['chat_id' => $chatId, 'user_id' => $userId],
-//            self::GET_CHAT_MEMBER
-//        );
+        $this->checkException(
+            $response,
+            ['chat_id' => $chatId, 'user_id' => $userId],
+            self::DELETE_MASSAGE
+        );
 
         return $response;
     }
