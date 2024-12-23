@@ -62,14 +62,14 @@ return [
             'MusicBot' => [
                 'token' => '7379411798:AAHrphBJ4yBhcAPWgQyL9XBR-f9NxYE7jQk',
                 'simple_commands' => [
-                    \App\Services\Telegram\Commands\MusicBot\StartCommand::nameToCall() => \App\Services\Telegram\Commands\MusicBot\StartCommand::class,
-                    \App\Services\Telegram\Commands\MusicBot\AccessCommand::nameToCall() => \App\Services\Telegram\Commands\MusicBot\AccessCommand::class,
+                    \App\Services\Telegram\Commands\MusicVK\StartCommand::nameToCall() => \App\Services\Telegram\Commands\MusicVK\StartCommand::class,
+                    \App\Services\Telegram\Commands\MusicVK\AccessCommand::nameToCall() => \App\Services\Telegram\Commands\MusicVK\AccessCommand::class,
                 ],
                 /** Количество действий, если больше просить подписаться */
                 'count_of_actions' => 99,
                 /** Commands requiring subscription */
                 'subscription_required' =>  [
-                    \App\Services\Telegram\Commands\MusicBot\AccessCommand::nameToCall()
+                    \App\Services\Telegram\Commands\MusicVK\AccessCommand::nameToCall()
                 ],
             ],
 
