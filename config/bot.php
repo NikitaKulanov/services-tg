@@ -74,7 +74,7 @@ return [
             ],
 
             'FreeEmailBot' => [
-                'token' => '7512284753:AAGm9BQ82cotdMQ1xXYJfIGDQ7HH6ndxmu0',
+                'token' => '1989706728:AAH2kvC51JhJ-lhgWUo13167LcOXzOTCrW4',
                 'simple_commands' => [
                     \App\Services\Telegram\Commands\FreeEmailBot\StartCommand::nameToCall() => \App\Services\Telegram\Commands\FreeEmailBot\StartCommand::class,
                     \App\Services\Telegram\Commands\FreeEmailBot\AccessCommand::nameToCall() => \App\Services\Telegram\Commands\FreeEmailBot\AccessCommand::class,
