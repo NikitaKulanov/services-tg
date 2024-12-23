@@ -17,7 +17,7 @@ class BackCommand extends Command
      */
     public function execute(MiniBot $bot, Chat $chat): void
     {
-        $bot->executeCommand($bot->getPastCommand(BeginStartCommand::nameToCall()));
+        $bot->executeCommand($bot->storageHelper->getPastCommand(BeginStartCommand::nameToCall()));
     }
 
     /**

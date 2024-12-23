@@ -12,7 +12,7 @@ use App\Services\Telegram\Commands\AdapterBot\StartCommand;
 
 return [
     'settings' => [
-        'base_token' => "6851291778:AAFMGgGVYqrnNOmcKFUvQCfeKT_ULxprJ-k",
+        'base_token' => "7436812591:AAHUv9bqawq1sN4zTpOBcoO8sqVhVRC3Ik0",
         'url_webhook' => env('URL_WEBHOOK'),
 
         /** Отвечать в группах */
@@ -45,17 +45,31 @@ return [
                 'storage' => 'storage.json'
             ],
 
-            'MusicBot' => [
-                'token' => '7379411798:AAHrphBJ4yBhcAPWgQyL9XBR-f9NxYE7jQk',
+            'MusicVK' => [
+                'token' => '7879559593:AAHl175DXRgbvHJWhXfpUDA3L9ZeR2QYFq0',
                 'simple_commands' => [
-                    \App\Services\Telegram\Commands\MusicBot\StartCommand::nameToCall() => \App\Services\Telegram\Commands\MusicBot\StartCommand::class,
-                    \App\Services\Telegram\Commands\MusicBot\AccessCommand::nameToCall() => \App\Services\Telegram\Commands\MusicBot\AccessCommand::class,
+                    \App\Services\Telegram\Commands\MusicVK\StartCommand::nameToCall() => \App\Services\Telegram\Commands\MusicVK\StartCommand::class,
+                    \App\Services\Telegram\Commands\MusicVK\AccessCommand::nameToCall() => \App\Services\Telegram\Commands\MusicVK\AccessCommand::class,
                 ],
                 /** Количество действий, если больше просить подписаться */
                 'count_of_actions' => 99,
                 /** Commands requiring subscription */
                 'subscription_required' =>  [
-                    \App\Services\Telegram\Commands\MusicBot\AccessCommand::nameToCall()
+                    \App\Services\Telegram\Commands\MusicVK\AccessCommand::nameToCall()
+                ],
+            ],
+
+            'MusicBot' => [
+                'token' => '7379411798:AAHrphBJ4yBhcAPWgQyL9XBR-f9NxYE7jQk',
+                'simple_commands' => [
+                    \App\Services\Telegram\Commands\MusicVK\StartCommand::nameToCall() => \App\Services\Telegram\Commands\MusicVK\StartCommand::class,
+                    \App\Services\Telegram\Commands\MusicVK\AccessCommand::nameToCall() => \App\Services\Telegram\Commands\MusicVK\AccessCommand::class,
+                ],
+                /** Количество действий, если больше просить подписаться */
+                'count_of_actions' => 99,
+                /** Commands requiring subscription */
+                'subscription_required' =>  [
+                    \App\Services\Telegram\Commands\MusicVK\AccessCommand::nameToCall()
                 ],
             ],
 
@@ -88,7 +102,7 @@ return [
             ],
 
             'FileCheckBot' => [
-                'token' => '7286332068:AAFrchTWs8WDawpuOWQDGhcFrQhPeddkiQs',
+                'token' => '6455367526:AAHwmAR3eutpESazEamfuPt5c1yvHsvSowo',
                 'simple_commands' => [
                     \App\Services\Telegram\Commands\FileCheckBot\StartCommand::nameToCall() => \App\Services\Telegram\Commands\FileCheckBot\StartCommand::class,
                     \App\Services\Telegram\Commands\FileCheckBot\AccessCommand::nameToCall() => \App\Services\Telegram\Commands\FileCheckBot\AccessCommand::class,

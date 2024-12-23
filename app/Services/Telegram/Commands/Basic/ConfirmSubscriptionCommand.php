@@ -22,11 +22,11 @@ class ConfirmSubscriptionCommand extends Command
     {
         if ($bot->checkChannelSubscriptions()) {
 
-            if (is_array($messagesId = $bot->getIdMessagesForDelete())) {
+            if (is_array($messagesId = $bot->storageHelper->getIdMessagesForDelete())) {
                 foreach ($messagesId as $messageId) {
                     $bot->deleteMassage($chat->id, $messageId, $chat->id);
                 }
-                $bot->setDeleteForMessages();
+                $bot->storageHelper->setDeleteForMessages();
             }
 
             $bot->sendMessage(
@@ -35,7 +35,7 @@ class ConfirmSubscriptionCommand extends Command
             TGClientHelper::info("Кто-то подписался!");
             // Выполнить желаемую команду, до просьбы подписаться
             $bot->executeCommand(
-                $bot->getDesiredCommand(BeginStartCommand::nameToCall())
+                $bot->storageHelper->getDesiredCommand(BeginStartCommand::nameToCall())
             );
         } else {
             $result = $bot->sendMessage(
@@ -43,7 +43,7 @@ class ConfirmSubscriptionCommand extends Command
             );
             $bot->executeBasicCommand(SubscribeCommand::nameToCall());
 
-            $bot->addMessageIdForDelete($result['message_id']);
+            $bot->storageHelper->addMessageIdForDelete($result['message_id']);
         }
     }
 

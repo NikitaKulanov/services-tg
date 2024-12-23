@@ -87,7 +87,7 @@ class SmiBot extends Bot
                 ->setCaption(
                     "⚡ <b>{$this->translate($post->title)}</b>\n\n" .
                     $this->translate($post->text) . "\n\n" .
-                    "👉 <a href='$post->url'>Читать статью полностью</a>\n\n"
+                    "👉  <a href='$post->url'>Статья The Guardian</a>\n\n"
 //                            . "🤝 <a href='{$this->config['settings']['url_channel']}'>Новости Запада ⚡ Подписаться</a>"
                 )
             ->deleteKeyboard()
